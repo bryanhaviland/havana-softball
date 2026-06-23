@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Havana Haviland | Softball</title>
+  <style>
+    /* ── Fonts ── */
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    /* ── CSS Variables ── */
+    :root {
+      --teal:       #0d9488;
+      --teal-dark:  #0f766e;
+      --teal-light: #ccfbf1;
+      --pink:       #c026d3;
+      --pink-dark:  #a21caf;
+      --pink-light: #fae8ff;
+      --purple:     #87c3aed;
+      --bg:         #fdf6ec;
+      --bg2:        #f2e8d8;
+      --bg3:        #e5d5be;
+      --text:       #2c1810;
+      --muted:      #7a6555;
+      --border:     #d4c4b0;
+      /* Lady Canes */
+      --canes-orange: #f97316;
+      --canes-green:  #16a34a;
+      --canes-bg:     #0a1a0e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── TOP NAV ── */
+    header {
+      background: linear-gradient(135deg, var(--bg2) 0%, #e8d8c4 100%);
+      border-bottom: 2px solid var(--teal);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+      padding: 0.75rem 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.5rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    nav button:hover { color: var(--text); background: var(--bg3); }
+
+    nav button.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--teal), var(--purple));
+    }
+
+    nav button.canes-btn.active {
+      background: linear-gradient(135deg, var(--canes-orange), var(--canes-green));
+    }
+
+    /* ── SECTIONS ── */
+    .section { display: none; }
+    .section.active { display: block; position: relative; z-index: 1; }
+
+    /* ── HERO / HOME ── */
+    #home {
+      min-height: calc(100vh - 64px);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: radial-gradient(ellipse at top, #e8d5f5 0%, var(--bg) 70%);
+      position: relative;
+      overflow: hidden;
+    }
+    #home.active { display: flex; }
+
+    #home::before {
+      content: '⚾';
+      font-size: 20rem;
+      position: absolute;
+      opacity: 0.03;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 20vw, 14rem);
+      line-height: 1;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--pink) 60%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0.15;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 10vw, 6rem);
+      letter-spacing: 4px;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--teal), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .hero-class {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-top: 0.4rem;
+    }
+
+    .tag {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 0.05em;
+    }
+
+    .tag-btn {
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, rgba(13,148,136,0.12), rgba(192,38,211,0.10));
+      border: 1px solid var(--teal);
+      color: var(--teal);
+      transition: all 0.2s;
+    }
+
+    .tag-btn:hover {
+      background: linear-gradient(135deg, var(--teal), var(--purple));
+      border-color: transparent;
+      transform: translateY(-1px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 3rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--teal), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-stat-lbl {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: -0.25rem;
+    }
+
+    /* ── ABOUT ── */
+    .page-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.25rem;
+    }
+
+    .page-title-bar {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--pink));
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 620px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, var(--bg3), var(--bg2));
+      border-radius: 16px;
+      border: 2px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 1rem;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-photo:hover { border-color: var(--teal); }
+    .about-photo .upload-icon { font-size: 2.5rem; }
+
+    .about-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    .about-info { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .info-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+
+    .info-card h3 {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .info-card p {
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .info-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .fact {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+    }
+
+    .fact-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .fact-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--pink);
+    }
+
+    /* ── STATS ── */
+    .season-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .season-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(90deg, rgba(13,148,136,0.10), rgba(192,38,211,0.05));
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .season-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      color: var(--teal);
+    }
+
+    .season-team {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .season-toggle { color: var(--muted); font-size: 1.2rem; transition: transform 0.3s; }
+    .season-card.open .season-toggle { transform: rotate(180deg); }
+
+    .stats-table-wrap {
+      overflow-x: auto;
+      display: none;
+    }
+
+    .season-card.open .stats-table-wrap { display: block; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    thead tr { background: var(--bg3); }
+
+    th {
+      padding: 0.6rem 1rem;
+      text-align: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    th:first-child { text-align: left; }
+
+    td {
+      padding: 0.6rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    td:first-child { text-align: left; font-weight: 600; color: var(--pink); }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(13,148,136,0.06); }
+
+    .stat-highlight { color: var(--teal); font-weight: 700; }
+
+    /* ── GALLERY ── */
+    .gallery-controls {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .upload-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--teal), var(--purple));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .upload-btn:hover { opacity: 0.85; }
+
+    .upload-btn.secondary {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    #photo-input, #video-input { display: none; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-item img, .gallery-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-item .remove-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-item:hover .remove-btn { display: flex; }
+
+    .gallery-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--muted);
+      background: var(--bg2);
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+    }
+
+    .gallery-empty .big-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+
+    /* ── VIDEO items ── */
+    .video-wrapper {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--bg);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      font-size: 2.5rem;
+      pointer-events: none;
+    }
+
+    /* ── LADY CANES ── */
+    #canes { display: none; }
+    #canes.active { display: block; }
+
+    .canes-wrap {
+      background: var(--canes-bg);
+      min-height: calc(100vh - 64px);
+      padding: 3rem 1.5rem;
+    }
+
+    .canes-inner { max-width: 900px; margin: 0 auto; }
+
+    .canes-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      letter-spacing: 4px;
+      background: linear-gradient(90deg, var(--canes-orange), var(--canes-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.25rem;
+    }
+
+    .canes-bar {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--canes-orange), var(--canes-green));
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+
+    .canes-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .canes-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .canes-card:hover {
+      border-color: var(--canes-orange);
+      transform: translateY(-2px);
+    }
+
+    .canes-card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+
+    .canes-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+      color: var(--canes-orange);
+      margin-bottom: 0.5rem;
+    }
+
+    .canes-card p {
+      color: #a3a3a3;
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .canes-roster {
+      margin-top: 2rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(22,163,74,0.25);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .canes-roster-header {
+      padding: 1rem 1.25rem;
+      background: rgba(22,163,74,0.12);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: var(--canes-green);
+      border-bottom: 1px solid rgba(22,163,74,0.2);
+    }
+
+    .canes-player {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .canes-player:last-child { border-bottom: none; }
+
+    .canes-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--canes-orange);
+      width: 2.5rem;
+      text-align: center;
+    }
+
+    .canes-player-info { flex: 1; }
+
+    .canes-player-name {
+      font-weight: 600;
+      color: #f5f5f5;
+      font-size: 0.95rem;
+    }
+
+    .canes-player-pos {
+      font-size: 0.75rem;
+      color: #8737373;
+      margin-top: 0.1rem;
+    }
+
+    .canes-badge {
+      background: var(--canes-green);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FLAG FOOTBALL ── */
+    .flagfootball-wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .ff-icon { font-size: 5rem; margin-bottom: 1rem; }
+
+    .ff-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 3px;
+      background: linear-gradient(90deg, #fb923c, #facc15);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .ff-sub {
+      color: var(--muted);
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .ff-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .ff-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      width: 100%;
+      max-width: 400px;
+      justify-content: center;
+    }
+
+    .ff-link:hover {
+      border-color: #fb923c;
+      color: #fb923c;
+      transform: translateX(4px);
+    }
+
+    .ff-link-icon { font-size: 1.3rem; }
+
+    .ff-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ff-stat {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .ff-stat-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      background: linear-gradient(135deg, #fb923c, #facc15);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .ff-stat-lbl {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox-inner {
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+    }
+
+    .lightbox-inner img, .lightbox-inner video {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      border-top: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── UTILITIES ── */
+    .edit-note {
+      display: inline-block;
+      background: rgba(13,148,136,0.08);
+      border: 1px solid rgba(13,148,136,0.25);
+      border-radius: 6px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.7rem;
+      color: var(--teal);
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ BACKGROUND MITT ══════════ -->
+<div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0;overflow:hidden;">
+  <svg viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg"
+       style="width:min(72vw,560px);opacity:0.12;transform:rotate(-15deg);">
+
+    <!-- Palm / main body -->
+    <ellipse cx="255" cy="310" rx="155" ry="165" fill="#0d9488"/>
+
+    <!-- Thumb lobe -->
+    <ellipse cx="110" cy="255" rx="62" ry="80" fill="#0d9488" transform="rotate(-20,110,255)"/>
+
+    <!-- Finger lobes -->
+    <ellipse cx="195" cy="120" rx="38" ry="85" fill="#0d9488" transform="rotate(-10,195,120)"/>
+    <ellipse cx="265" cy="100" rx="38" ry="90" fill="#0d9488" transform="rotate(0,265,100)"/>
+    <ellipse cx="335" cy="115" rx="36" ry="82" fill="#0d9488" transform="rotate(8,335,115)"/>
+    <ellipse cx="395" cy="150" rx="32" ry="72" fill="#0d9488" transform="rotate(18,395,150)"/>
+
+    <!-- Web between thumb and fingers -->
+    <path d="M148,210 Q190,155 220,165 Q185,195 175,230 Z" fill="#0f766e"/>
+
+    <!-- Web lacing lines -->
+    <line x1="158" y1="218" x2="205" y2="170" stroke="#0f5c55" stroke-width="3" stroke-linecap="round"/>
+    <line x1="168" y1="228" x2="210" y2="182" stroke="#0f5c55" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="178" y1="238" x2="215" y2="195" stroke="#0f5c55" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Pocket circle -->
+    <circle cx="265" cy="330" r="70" fill="none" stroke="#0f5c55" stroke-width="5" opacity="0.6"/>
+    <circle cx="265" cy="330" r="40" fill="none" stroke="#0f5c55" stroke-width="3" opacity="0.4"/>
+
+    <!-- Lacing dots around pocket -->
+    <circle cx="265" cy="262" r="5" fill="#0f5c55" opacity="0.5"/>
+    <circle cx="330" cy="295" r="5" fill="#0f5c55" opacity="0.5"/>
+    <circle cx="330" cy="365" r="5" fill="#0f5c55" opacity="0.5"/>
+    <circle cx="265" cy="398" r="5" fill="#0f5c55" opacity="0.5"/>
+    <circle cx="200" cy="365" r="5" fill="#0f5c55" opacity="0.5"/>
+    <circle cx="200" cy="295" r="5" fill="#0f5c55" opacity="0.5"/>
+
+    <!-- Wrist strap -->
+    <path d="M140,440 Q255,480 370,440 L365,470 Q255,510 145,470 Z" fill="#0f766e"/>
+    <line x1="145" y1="455" x2="365" y2="455" stroke="#0f5c55" stroke-width="2" opacity="0.5"/>
+
+    <!-- Knuckle creases on fingers -->
+    <path d="M175,160 Q195,155 215,160" fill="none" stroke="#0f5c55" stroke-width="2" opacity="0.5"/>
+    <path d="M248,140 Q265,135 282,140" fill="none" stroke="#0f5c55" stroke-width="2" opacity="0.5"/>
+    <path d="M318,155 Q335,148 352,155" fill="none" stroke="#0f5c55" stroke-width="2" opacity="0.5"/>
+    <path d="M374,188 Q390,182 406,188" fill="none" stroke="#0f5c55" stroke-width="2" opacity="0.5"/>
+  </svg>
+</div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header>
+  <div class="header-inner">
+    <div class="logo"><span style="-webkit-text-fill-color:initial;background:none;">🥎</span> Havana Haviland</div>
+    <nav>
+      <button onclick="showSection('home')" class="active" id="btn-home">Home</button>
+      <button onclick="showSection('about')" id="btn-about">About</button>
+      <button onclick="showSection('stats')" id="btn-stats">Stats</button>
+      <button onclick="showSection('gallery')" id="btn-gallery">Gallery</button>
+      <button onclick="showSection('canes')" id="btn-canes" class="canes-btn">🌀 Lady Canes</button>
+      <button onclick="showSection('flagfootball')" id="btn-flagfootball">🏈 Flag Football</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════ HOME ══════════ -->
+<section id="home" class="section active">
+  <div class="hero-number">#87</div>
+  <div class="hero-content">
+    <div class="hero-name">Havana Haviland</div>
+    <div class="hero-subtitle">Catcher · #87</div>
+    <div class="hero-class">Class of 2033</div>
+    <div class="hero-tags">
+      <span class="tag">🌀 Lady Canes</span>
+      <span class="tag">🏈 Flag Football</span>
+      <button class="tag tag-btn" onclick="showSection('stats')">🥎 View Stats</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-val">.456</div>
+        <div class="hero-stat-lbl">Spring '26 AVG</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">5</div>
+        <div class="hero-stat-lbl">Home Runs</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">31</div>
+        <div class="hero-stat-lbl">RBIs</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">.912</div>
+        <div class="hero-stat-lbl">SLG</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about" class="section">
+  <div class="page-wrap">
+    <div class="page-title">About Havana</div>
+    <div class="page-title-bar"></div>
+    <span class="edit-note">✏️ All content below is placeholder — update with real info!</span>
+
+    <div class="about-grid">
+      <!-- Photo upload -->
+      <div class="about-photo" onclick="document.getElementById('profile-input').click()" id="profile-photo-box">
+        <div class="upload-icon">📸</div>
+        <div>Click to upload<br>profile photo</div>
+        <input type="file" id="profile-input" accept="image/*" style="display:none" onchange="loadProfilePhoto(event)" />
+      </div>
+
+      <div class="about-info">
+        <div class="info-card">
+          <h3>Bio</h3>
+          <p>
+            Havana Haviland is a dynamic multi-sport athlete with a passion for the game and a competitive drive that sets her apart on every field. Whether she's turning a double play at short, tracking down a fly ball in center, or firing strikes from the mound — Havana brings energy and heart to every at-bat and every inning.
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>Player Details</h3>
+          <div class="info-facts">
+            <div class="fact">
+              <div class="fact-label">Position(s)</div>
+              <div class="fact-value">Catcher</div>
+            </div>
+            <div class="fact">
+              <div class="fact-label">Bats / Throws</div>
+              <div class="fact-value">R / R</div>
+            </div>
+            <div class="fact">
+              <div class="fact-label">Grad Year</div>
+              <div class="fact-value">2033</div>
+            </div>
+            <div class="fact">
+              <div class="fact-label">Hometown</div>
+              <div class="fact-value">Orlando, FL</div>
+            </div>
+            <div class="fact">
+              <div class="fact-label">Height</div>
+              <div class="fact-value">5'6"</div>
+            </div>
+            <div class="fact">
+              <div class="fact-label">Jersey #</div>
+              <div class="fact-value">#87</div>
+            </div>
+          </div>
+        </div>
+        <div class="info-card">
+          <h3>Highlights</h3>
+          <p>
+            🏆 2023 Tournament Champion — Lady Canes Summer Shootout<br>
+            ⭐ All-Tournament Team — Spring Classic 2024<br>
+            📌 Team captain & leader in batting average two seasons running<br>
+            🎯 Committed to excellence on and off the field
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STATS ══════════ -->
+<section id="stats" class="section">
+  <div class="page-wrap">
+    <div class="page-title">Season Stats</div>
+    <div class="page-title-bar"></div>
+    <!-- Spring 2026 -->
+    <div class="season-card open" onclick="toggleSeason(this)">
+      <div class="season-header">
+        <div>
+          <div class="season-year">Spring 2026</div>
+          <div class="season-team">Lady Canes</div>
+        </div>
+        <div class="season-toggle">▼</div>
+      </div>
+      <div class="stats-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>G</th>
+              <th>AB</th>
+              <th>H</th>
+              <th>1B</th>
+              <th>2B</th>
+              <th>3B</th>
+              <th>HR</th>
+              <th>RBI</th>
+              <th>R</th>
+              <th>BB</th>
+              <th>K</th>
+              <th>SB</th>
+              <th>AVG</th>
+              <th>OBP</th>
+              <th>SLG</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Batting</td>
+              <td>30</td>
+              <td>57</td>
+              <td>26</td>
+              <td>14</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>31</td>
+              <td>15</td>
+              <td>12</td>
+              <td>19</td>
+              <td>5</td>
+              <td class="stat-highlight">.456</td>
+              <td class="stat-highlight">.551</td>
+              <td class="stat-highlight">.912</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Catching -->
+        <table style="margin-top:0.5rem">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Inn</th>
+              <th>PB</th>
+              <th>SB</th>
+              <th>CS</th>
+              <th>CS%</th>
+              <th>PIK</th>
+              <th>CI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Catching</td>
+              <td>91.2</td>
+              <td>19</td>
+              <td>54</td>
+              <td>10</td>
+              <td class="stat-highlight">15.6%</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Fall 2025 -->
+    <div class="season-card" onclick="toggleSeason(this)">
+      <div class="season-header">
+        <div>
+          <div class="season-year">Fall 2025</div>
+          <div class="season-team">Lady Canes</div>
+        </div>
+        <div class="season-toggle">▼</div>
+      </div>
+      <div class="stats-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>G</th>
+              <th>AB</th>
+              <th>H</th>
+              <th>1B</th>
+              <th>2B</th>
+              <th>3B</th>
+              <th>HR</th>
+              <th>RBI</th>
+              <th>R</th>
+              <th>BB</th>
+              <th>K</th>
+              <th>SB</th>
+              <th>AVG</th>
+              <th>OBP</th>
+              <th>SLG</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Batting</td>
+              <td>34</td>
+              <td>65</td>
+              <td>34</td>
+              <td>28</td>
+              <td>3</td>
+              <td>0</td>
+              <td>3</td>
+              <td>27</td>
+              <td>18</td>
+              <td>5</td>
+              <td>13</td>
+              <td>14</td>
+              <td class="stat-highlight">.523</td>
+              <td class="stat-highlight">.557</td>
+              <td class="stat-highlight">.708</td>
+            </tr>
+          </tbody>
+        </table>
+        <table style="margin-top:0.5rem">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Inn</th>
+              <th>PB</th>
+              <th>SB</th>
+              <th>CS</th>
+              <th>CS%</th>
+              <th>PIK</th>
+              <th>CI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Catching</td>
+              <td>98</td>
+              <td>18</td>
+              <td>74</td>
+              <td>12</td>
+              <td class="stat-highlight">14.0%</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Spring 2025 -->
+    <div class="season-card" onclick="toggleSeason(this)">
+      <div class="season-header">
+        <div>
+          <div class="season-year">Spring 2025</div>
+          <div class="season-team">Lady Canes</div>
+        </div>
+        <div class="season-toggle">▼</div>
+      </div>
+      <div class="stats-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>G</th>
+              <th>AB</th>
+              <th>H</th>
+              <th>1B</th>
+              <th>2B</th>
+              <th>3B</th>
+              <th>HR</th>
+              <th>RBI</th>
+              <th>R</th>
+              <th>BB</th>
+              <th>K</th>
+              <th>SB</th>
+              <th>AVG</th>
+              <th>OBP</th>
+              <th>SLG</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Batting</td>
+              <td>38</td>
+              <td>65</td>
+              <td>31</td>
+              <td>25</td>
+              <td>2</td>
+              <td>1</td>
+              <td>3</td>
+              <td>26</td>
+              <td>21</td>
+              <td>7</td>
+              <td>13</td>
+              <td>15</td>
+              <td class="stat-highlight">.477</td>
+              <td class="stat-highlight">.528</td>
+              <td class="stat-highlight">.677</td>
+            </tr>
+          </tbody>
+        </table>
+        <table style="margin-top:0.5rem">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Inn</th>
+              <th>PB</th>
+              <th>SB</th>
+              <th>CS</th>
+              <th>CS%</th>
+              <th>PIK</th>
+              <th>CI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Catching</td>
+              <td>104.1</td>
+              <td>44</td>
+              <td>175</td>
+              <td>16</td>
+              <td class="stat-highlight">8.4%</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Fall 2024 -->
+    <div class="season-card" onclick="toggleSeason(this)">
+      <div class="season-header">
+        <div>
+          <div class="season-year">Fall 2024</div>
+          <div class="season-team">Banshees &amp; Yellow Jackets</div>
+        </div>
+        <div class="season-toggle">▼</div>
+      </div>
+      <div class="stats-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>G</th>
+              <th>AB</th>
+              <th>H</th>
+              <th>1B</th>
+              <th>2B</th>
+              <th>3B</th>
+              <th>HR</th>
+              <th>RBI</th>
+              <th>R</th>
+              <th>BB</th>
+              <th>K</th>
+              <th>SB</th>
+              <th>AVG</th>
+              <th>OBP</th>
+              <th>SLG</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Banshees</td>
+              <td>11</td>
+              <td>15</td>
+              <td>5</td>
+              <td>4</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>4</td>
+              <td>4</td>
+              <td>3</td>
+              <td>6</td>
+              <td>9</td>
+              <td class="stat-highlight">.333</td>
+              <td class="stat-highlight">.444</td>
+              <td class="stat-highlight">.400</td>
+            </tr>
+            <tr>
+              <td>Yellow Jackets</td>
+              <td>12</td>
+              <td>18</td>
+              <td>9</td>
+              <td>7</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+              <td>7</td>
+              <td>18</td>
+              <td>9</td>
+              <td>4</td>
+              <td>7</td>
+              <td class="stat-highlight">.500</td>
+              <td class="stat-highlight">.667</td>
+              <td class="stat-highlight">.611</td>
+            </tr>
+          </tbody>
+        </table>
+        <table style="margin-top:0.5rem">
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>Inn</th>
+              <th>PB</th>
+              <th>SB</th>
+              <th>CS</th>
+              <th>CS%</th>
+              <th>PIK</th>
+              <th>CI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Banshees</td>
+              <td>23</td>
+              <td>13</td>
+              <td>57</td>
+              <td>2</td>
+              <td class="stat-highlight">3.4%</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>Yellow Jackets</td>
+              <td>21</td>
+              <td>12</td>
+              <td>51</td>
+              <td>2</td>
+              <td class="stat-highlight">3.8%</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ GALLERY ══════════ -->
+<section id="gallery" class="section">
+  <div class="page-wrap">
+    <div class="page-title">Gallery</div>
+    <div class="page-title-bar"></div>
+
+    <div class="gallery-controls">
+      <button class="upload-btn" onclick="document.getElementById('photo-input').click()">
+        📸 Add Photos
+      </button>
+      <button class="upload-btn" onclick="document.getElementById('video-input').click()">
+        🎬 Add Videos
+      </button>
+      <input type="file" id="photo-input" accept="image/*" multiple onchange="addPhotos(event)" />
+      <input type="file" id="video-input" accept="video/*" multiple onchange="addVideos(event)" />
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid">
+      <div class="gallery-empty">
+        <div class="big-icon">📷</div>
+        <div style="font-weight:600;color:var(--text);margin-bottom:0.25rem">No media yet</div>
+        <div style="font-size:0.85rem">Click "Add Photos" or "Add Videos" to get started</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ LADY CANES ══════════ -->
+<section id="canes" class="section">
+  <div class="canes-wrap">
+    <div class="canes-inner">
+      <div class="canes-title">🌀 Lady Canes</div>
+      <div class="canes-bar"></div>
+
+      <div class="canes-cards">
+        <div class="canes-card">
+          <div class="canes-card-icon">🏆</div>
+          <h3>Championships</h3>
+          <p>Multiple tournament titles across Florida and the Southeast. The Lady Canes bring elite travel ball competition to every tournament they enter.</p>
+        </div>
+        <div class="canes-card">
+          <div class="canes-card-icon">📍</div>
+          <h3>Based In</h3>
+          <p>Orlando, FL. Competing in 10U–18U age groups across USSSA, NSA, and ASA-sanctioned events year-round.</p>
+        </div>
+        <div class="canes-card">
+          <div class="canes-card-icon">🎯</div>
+          <h3>Mission</h3>
+          <p>Develop elite softball players — on the field and in life. Every rep, every inning, every tournament is prep for the next level.</p>
+        </div>
+        <div class="canes-card">
+          <div class="canes-card-icon">⚡</div>
+          <h3>Schedule</h3>
+          <p>Tournament schedule available on GameChanger. Follow the Lady Canes for live game updates, scores, and standings all season long.</p>
+        </div>
+      </div>
+
+      <!-- Roster placeholder -->
+      <div class="canes-roster" style="margin-top:2.5rem">
+        <div class="canes-roster-header">Team Roster</div>
+        <div class="canes-player">
+          <div class="canes-num">7</div>
+          <div class="canes-player-info">
+            <div class="canes-player-name">Havana Haviland</div>
+            <div class="canes-player-pos">Catcher</div>
+          </div>
+          <span class="canes-badge">Captain</span>
+        </div>
+        <div class="canes-player">
+          <div class="canes-num">12</div>
+          <div class="canes-player-info">
+            <div class="canes-player-name">Player Name</div>
+            <div class="canes-player-pos">Catcher</div>
+          </div>
+        </div>
+        <div class="canes-player">
+          <div class="canes-num">3</div>
+          <div class="canes-player-info">
+            <div class="canes-player-name">Player Name</div>
+            <div class="canes-player-pos">1st Base</div>
+          </div>
+        </div>
+        <div class="canes-player">
+          <div class="canes-num">22</div>
+          <div class="canes-player-info">
+            <div class="canes-player-name">Player Name</div>
+            <div class="canes-player-pos">Pitcher / OF</div>
+          </div>
+        </div>
+        <div class="canes-player">
+          <div class="canes-num">8</div>
+          <div class="canes-player-info">
+            <div class="canes-player-name">Player Name</div>
+            <div class="canes-player-pos">2nd Base</div>
+          </div>
+        </div>
+        <div class="canes-player">
+          <div class="canes-num">15</div>
+          <div class="canes-player-info">
+            <div class="canes-player-name">Player Name</div>
+            <div class="canes-player-pos">3rd Base</div>
+          </div>
+        </div>
+        <div class="canes-player">
+          <div class="canes-num">11</div>
+          <div class="canes-player-info">
+            <div class="canes-player-name">Player Name</div>
+            <div class="canes-player-pos">Left Field</div>
+          </div>
+        </div>
+        <div class="canes-player">
+          <div class="canes-num">5</div>
+          <div class="canes-player-info">
+            <div class="canes-player-name">Player Name</div>
+            <div class="canes-player-pos">Right Field</div>
+          </div>
+        </div>
+      </div>
+
+      <p style="color:#525252;font-size:0.78rem;margin-top:1rem;text-align:center;">
+        ✏️ Placeholder roster — update with real teammates!
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FLAG FOOTBALL ══════════ -->
+<section id="flagfootball" class="section">
+  <div class="flagfootball-wrap">
+    <div class="ff-icon">🏈</div>
+    <div class="ff-title">Flag Football</div>
+    <div class="ff-sub">Havana's game doesn't stop when softball season ends.</div>
+
+    <div class="ff-links">
+      <a href="#" class="ff-link" onclick="return false;" title="Update with real link">
+        <span class="ff-link-icon">📋</span>
+        Team Roster & Schedule
+      </a>
+      <a href="#" class="ff-link" onclick="return false;" title="Update with real link">
+        <span class="ff-link-icon">🎮</span>
+        GameChanger / Game Tracker
+      </a>
+      <a href="#" class="ff-link" onclick="return false;" title="Update with real link">
+        <span class="ff-link-icon">📸</span>
+        Flag Football Gallery
+      </a>
+      <a href="#" class="ff-link" onclick="return false;" title="Update with real link">
+        <span class="ff-link-icon">🏆</span>
+        League Standings
+      </a>
+    </div>
+
+    <div class="ff-stats-grid">
+      <div class="ff-stat">
+        <div class="ff-stat-val">—</div>
+        <div class="ff-stat-lbl">TDs</div>
+      </div>
+      <div class="ff-stat">
+        <div class="ff-stat-val">—</div>
+        <div class="ff-stat-lbl">INT</div>
+      </div>
+      <div class="ff-stat">
+        <div class="ff-stat-val">—</div>
+        <div class="ff-stat-lbl">Flags</div>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:0.75rem;margin-top:1.5rem;">
+      ✏️ Add real links & stats above — update href attributes with actual URLs
+    </p>
+  </div>
+</section>
+
+<!-- ══════════ LIGHTBOX ══════════ -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div id="lightbox-content"></div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  &copy; 2024 Havana Haviland · Built with ❤️ &amp; ⚾
+</footer>
+
+<!-- ══════════ SCRIPTS ══════════ -->
+<script>
+  // ── Nav routing ──
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('btn-' + id).classList.add('active');
+  }
+
+  // ── Season accordion ──
+  function toggleSeason(card) {
+    // don't collapse if clicking inside a table
+    card.classList.toggle('open');
+  }
+
+  // ── Profile photo ──
+  function loadProfilePhoto(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const box = document.getElementById('profile-photo-box');
+      box.innerHTML = `<img src="${e.target.result}" alt="Havana" /><input type="file" id="profile-input" accept="image/*" style="display:none" onchange="loadProfilePhoto(event)" />`;
+      box.onclick = () => document.getElementById('profile-input').click();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // ── Gallery ──
+  let mediaItems = [];
+
+  function clearEmpty() {
+    const empty = document.querySelector('.gallery-empty');
+    if (empty) empty.remove();
+  }
+
+  function addPhotos(event) {
+    clearEmpty();
+    Array.from(event.target.files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const idx = mediaItems.length;
+        mediaItems.push({ type: 'photo', src: e.target.result });
+        const grid = document.getElementById('gallery-grid');
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.dataset.idx = idx;
+        item.innerHTML = `
+          <img src="${e.target.result}" alt="Game photo" onclick="openLightbox(${idx})" />
+          <button class="remove-btn" onclick="removeItem(event,${idx})">✕</button>
+        `;
+        grid.appendChild(item);
+      };
+      reader.readAsDataURL(file);
+    });
+    event.target.value = '';
+  }
+
+  function addVideos(event) {
+    clearEmpty();
+    Array.from(event.target.files).forEach(file => {
+      const url = URL.createObjectURL(file);
+      const idx = mediaItems.length;
+      mediaItems.push({ type: 'video', src: url });
+      const grid = document.getElementById('gallery-grid');
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.dataset.idx = idx;
+      item.innerHTML = `
+        <div class="video-wrapper" onclick="openLightbox(${idx})">
+          <video src="${url}" muted></video>
+          <div class="play-overlay">▶</div>
+        </div>
+        <button class="remove-btn" onclick="removeItem(event,${idx})">✕</button>
+      `;
+      grid.appendChild(item);
+    });
+    event.target.value = '';
+  }
+
+  function removeItem(e, idx) {
+    e.stopPropagation();
+    const item = document.querySelector(`.gallery-item[data-idx="${idx}"]`);
+    if (item) item.remove();
+    if (document.querySelectorAll('.gallery-item').length === 0) {
+      document.getElementById('gallery-grid').innerHTML = `
+        <div class="gallery-empty">
+          <div class="big-icon">📷</div>
+          <div style="font-weight:600;color:var(--text);margin-bottom:0.25rem">No media yet</div>
+          <div style="font-size:0.85rem">Click "Add Photos" or "Add Videos" to get started</div>
+        </div>`;
+    }
+  }
+
+  // ── Lightbox ──
+  function openLightbox(idx) {
+    const item = mediaItems[idx];
+    if (!item) return;
+    const lb = document.getElementById('lightbox');
+    const content = document.getElementById('lightbox-content');
+    if (item.type === 'photo') {
+      content.innerHTML = `<img src="${item.src}" alt="Photo" />`;
+    } else {
+      content.innerHTML = `<video src="${item.src}" controls autoplay style="max-width:90vw;max-height:85vh;border-radius:10px;"></video>`;
+    }
+    lb.classList.add('open');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    // stop video playback
+    const v = document.querySelector('#lightbox-content video');
+    if (v) v.pause();
+  }
+
+  // Close lightbox on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+</body>
+</html>
